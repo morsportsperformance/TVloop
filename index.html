@@ -4449,7 +4449,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       line3(V, add(V, mul(a, 0.42)), REF, 4, 0.9 * al, [12, 10]); arc3(V, a, b, 0.26, u, MEAS, al);
     } },
   { id: '2.5', dur: 9, head: 'Hips leading the way', tech: 'Pelvis rotation',
-    why: 'Hips that open first creates a stretch that connects ground power to the arm.',
+    why: 'Hips that open first create a stretch that connects ground power to the arm.',
     items: [{ key: 'pelvis_rotation_at_footstrike', unit: '°', min: 5, max: 95, lo: 35, hi: 60 }],
     view: { az: 0, el: 60, margin: 0.74 },
     draw(P, u, al) { const m = mid(P.rHip, P.lHip), d = norm(flat(sub(P.lHip, P.rHip)));
