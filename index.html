@@ -4373,8 +4373,8 @@ const CH1 = { n: 1, name: 'Leg Lift', at: MKH, lead: MKH - SET, titleFrom: SET, 
       line3([p0[0], p0[1], z0], [p0[0], p0[1], z1], REF, 4, 0.9 * al, [14, 12]); label3([p0[0], p0[1], z1], 'START', 0, -18, '#e8f1f8', al, 'center');
       glow3([p0[0], y1, z0], [p0[0], y1, z1], MEAS, 7, al * clamp(u * 3, 0, 1));
       glow3([p0[0], p0[1], p0[2]], [p0[0], y1, p0[2]], MEAS, 7, al); dot3([p0[0], p0[1], p0[2]], '#e8f1f8', 8, al); dot3([p0[0], y1, p0[2]], MEAS, 10, al); } },
-  { id: '1.2', dur: 10, head: 'Moving toward the plate early', tech: 'Pelvis forward shift',
-    why: 'Pitchers normally start moving toward the plate as the leg lifts.',
+  { id: '1.2', dur: 10, head: 'Initial movement', tech: 'Pelvis Shift',
+    why: 'Elite pitchers initiate with a hinge then movement toward the plate.',
     items: [{ key: 'pelvis_forward_shift_during_leg_lift', unit: ' in', plain: 'TOWARD THE PLATE BY THE TOP OF THE LIFT' }],
     view: { az: 0, el: 6, joints: ['pelvis', 'thorax', 'rHip', 'lHip', 'rKnee', 'lKnee', 'rShoulder', 'lShoulder', 'rAnkle'], margin: 0.7 },
     draw(P, u, al) { const p0 = srcJoint('pelvis', 0), p1 = srcJoint('pelvis', MKH), z0 = p0[2] - 0.38, z1 = p0[2] + 0.45, x = lerp(p0[0], p1[0], u), y = p0[1];
@@ -4382,8 +4382,8 @@ const CH1 = { n: 1, name: 'Leg Lift', at: MKH, lead: MKH - SET, titleFrom: SET, 
       glow3([x, y, z0], [x, y, z1], MEAS, 7, al * clamp(u * 3, 0, 1));
       glow3([p0[0], y, p0[2]], [x, y, p0[2]], MEAS, 7, al); dot3([p0[0], y, p0[2]], '#e8f1f8', 8, al); dot3([x, y, p0[2]], MEAS, 10, al);
       label3([p0[0] + 0.55, y, z0], 'TO HOME PLATE', 0, 44, '#e8f1f8', al, 'center'); line3([p0[0] + 0.3, y, z0], [p0[0] + 0.8, y, z0], REF, 4, 0.9 * al, [14, 12]); } },
-  { id: '1.3', dur: 9, head: 'Loading the back hip', tech: 'Back-hip coil',
-    why: 'A loaded back hip stores energy for the stride.',
+  { id: '1.3', dur: 9, head: 'Loading the back hip', tech: 'Rear leg loading strategy',
+    why: 'How you load the back leg affects your timing and positions later in the throw.',
     items: [{ key: 'stance_hip_coiling_during_leg_lift', unit: '°', plain: 'OF INWARD ROTATION AT THE BACK HIP' }],
     view: { az: -28, el: 34, joints: ['pelvis', 'rHip', 'lHip', 'rKnee', 'lKnee', 'rAnkle', 'thorax', 'headTop', 'rShoulder', 'lShoulder'], margin: 0.74 },
     draw(P, u, al) {
@@ -4393,7 +4393,7 @@ const CH1 = { n: 1, name: 'Leg Lift', at: MKH, lead: MKH - SET, titleFrom: SET, 
       ring3(c, front, inward, r, 0, Math.PI * 2, REF, 4, 0.7 * al, [10, 10]);
       ring3(c, front, inward, r, 0, end, MEAS, 9, al);
       dot3(add(c, add(mul(front, r * Math.cos(end)), mul(inward, r * Math.sin(end)))), MEAS, 11, al * clamp(u * 4, 0, 1)); } },
-  { id: '1.4', dur: 10, at: BAC, lead: BAC - MKH, head: 'Shoulder tilt as the arm gets into position', tech: 'Trunk tilt, bottom of the arm circle', why: '',
+  { id: '1.4', dur: 10, at: BAC, lead: BAC - MKH, head: 'Shoulder tilt as the arm gets into position', tech: 'Trunk tilt, bottom of the arm circle', why: 'Throwing level, uphill, or downhill can affect timing and positions at delivery.',
     items: [{ key: 'trunk_lateral_tilt_at_bottom_of_arm_circle', unit: '°', plain: 'SHOULDER LINE AGAINST HIP LINE' }],
     view: { az: -6, el: 5 },
     draw(P, u, al, v, t) {
@@ -4421,7 +4421,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       label3(mid(a, b), 'STRIDE', 0, -22, MEAS, al * u, 'center');
     } },
   { id: '2.2', dur: 9, head: 'Where your front foot lands', tech: 'Lead foot position',
-    why: 'Landing in line lets the hips rotate freely.',
+    why: 'Landing slightly across the body can help the hips rotate freely.',
     items: [{ key: 'lead_foot_lateral_position_at_footstrike', unit: ' in', min: -6, max: 24, lo: 4, hi: 14 }],
     view: { az: 0, el: 58, extra: [[0.1, 0.9, 0], [2.3, 0.9, 0]] },
     draw(P, u, al) {
@@ -4431,7 +4431,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       glow3(q, lerp3(q, l, u), MEAS, 8, al); dot3(lerp3(q, l, u), MEAS, 10, al);
     } },
   { id: '2.3', dur: 8, head: 'Which way your front foot points', tech: 'Lead foot rotation',
-    why: 'Foot direction sets up the front hip to rotate.',
+    why: 'Landing with a proper foot angle lets the hips rotate freely.',
     items: [{ key: 'lead_foot_rotation_at_footstrike', unit: '°', min: -15, max: 40, lo: 5, hi: 20 }],
     view: { az: 0, el: 58, joints: ['lAnkle', 'lToe', 'lKnee', 'lHip', 'pelvis', 'rHip', 'rKnee'], margin: 0.72, extra: [[2.3, 0.3, 0]] },
     hi: ['lAnkle-lToe'],
@@ -4440,7 +4440,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       line3(l, add(l, mul(X, 0.62)), REF, 4, 0.9 * al, [14, 12]); label3(add(l, mul(X, 0.62)), 'TO HOME PLATE', 0, -20, '#e8f1f8', al, 'right');
       glow3(l, add(l, mul(b, 0.62)), MEAS, 7, al * clamp(u * 3, 0, 1)); arc3(l, X, b, 0.44, u, MEAS, al);
     } },
-  { id: '2.4', dur: 8, head: 'A front knee ready to brace', tech: 'Lead knee flexion',
+  { id: '2.4', dur: 8, head: 'A front knee landing in a power position', tech: 'Lead knee flexion',
     why: 'A bent knee at landing is ready to stabilize then block.',
     items: [{ key: 'lead_knee_flexion_at_footstrike', unit: '°', min: 15, max: 75, target: 45 }],
     view: { az: -12, el: 9 }, hi: ['lHip-lKnee', 'lKnee-lAnkle'],
@@ -4449,7 +4449,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       line3(V, add(V, mul(a, 0.42)), REF, 4, 0.9 * al, [12, 10]); arc3(V, a, b, 0.26, u, MEAS, al);
     } },
   { id: '2.5', dur: 9, head: 'Hips leading the way', tech: 'Pelvis rotation',
-    why: 'Hips that open first initiate acceleration.',
+    why: 'Hips that open first creates a stretch that connects ground power to the arm.',
     items: [{ key: 'pelvis_rotation_at_footstrike', unit: '°', min: 5, max: 95, lo: 35, hi: 60 }],
     view: { az: 0, el: 60, margin: 0.74 },
     draw(P, u, al) { const m = mid(P.rHip, P.lHip), d = norm(flat(sub(P.lHip, P.rHip)));
@@ -4460,7 +4460,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
     view: { az: 0, el: 60, margin: 0.74 },
     draw(P, u, al) { const m = mid(P.rShoulder, P.lShoulder), d = norm(flat(sub(P.lShoulder, P.rShoulder)));
       squareLine(m, al); glow3(sub(m, mul(d, 0.5)), add(m, mul(d, 0.5)), SEC, 9, al); arc3(m, Yp, d, 0.4, u, SEC, al); label3(add(m, mul(d, 0.5)), 'SHOULDERS', 0, 46, SEC, al, 'right'); } },
-  { id: '2.7', dur: 13, head: 'The stretch that powers your fastball', tech: 'Hip-shoulder separation',
+  { id: '2.7', dur: 13, head: 'The stretch that powers your delivery', tech: 'Hip-shoulder separation',
     why: 'An appropriate amount of stretch is linked to more velocity.',
     items: [{ key: 'hip_shoulder_separation_at_footstrike', unit: '°', min: 0, max: 70, lo: 25, hi: 45 }],
     view: { az: 0, el: 60, margin: 0.74 },
@@ -4473,7 +4473,7 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       arc3(c, ds, dh, 0.58, a3, GOLD, al * pulse); arc3(c, mul(ds, -1), mul(dh, -1), 0.58, a3, GOLD, al * pulse);
     } },
   { id: '2.8', dur: 8, head: 'Torso lean at landing', tech: 'Trunk tilt',
-    why: '',
+    why: 'Throwing level, uphill, or downhill can affect timing and positions at delivery.',
     items: [{ key: 'trunk_lateral_tilt_at_footstrike', unit: '°', plain: 'OF LEAN TOWARD THE PLATE' }],
     view: { az: 4, el: 4 },
     draw(P, u, al) {
@@ -4483,21 +4483,21 @@ const CH3 = { n: 2, name: 'Footstrike', at: FS, lead: 50, titleFrom: FS - 120, b
       line3(base, add(base, mul(up, L * 1.15)), REF, 4, 0.9 * al, [14, 12]); label3(add(base, mul(up, L * 1.15)), 'UPRIGHT', 0, -18, '#e8f1f8', al, 'center');
       glow3(base, add(base, mul(d, L * 1.15)), MEAS, 9, al); dot3(base, MEAS, 9, al); arc3(base, up, d, L * 0.9, u, MEAS, al); } },
   { id: '2.9', dur: 9, head: 'An arm that is on time', tech: 'Shoulder external rotation (arm timing)',
-    why: 'An on-time arm can help protect the elbow and shoulder.',
+    why: 'An on-time arm improves efficiency and can help protect the elbow and shoulder.',
     items: [{ key: 'shoulder_external_rotation_at_footstrike', unit: '°', min: 0, max: 135, lo: 45, hi: 90 }],
     view: { az: 168, el: 10, joints: UPPER(), margin: 0.62 }, hi: ['rElbow-rWrist', 'rWrist-rHandTip'],
     draw(P, u, al) { const V = P.rElbow, hum = norm(sub(P.rElbow, P.rShoulder)), fore = norm(sub(P.rWrist, V));
       const ref = norm(sub(X, mul(hum, dot(X, hum)))), fp = norm(sub(fore, mul(hum, dot(fore, hum))));
       line3(V, add(V, mul(ref, 0.36)), REF, 4, 0.9 * al, [12, 10]); arc3(V, ref, fp, 0.25, u, MEAS, al); } },
   { id: '2.10', dur: 8, head: 'The path your arm takes', tech: 'Shoulder horizontal abduction',
-    why: 'An efficient arm path helps protect the shoulder.',
+    why: 'How you let your arm trail affects timing and joint angles later in the delivery.',
     items: [{ key: 'shoulder_horizontal_abduction_at_footstrike', unit: '°', min: 0, max: 70, target: 20 }],
     view: { az: 0, el: 62, joints: UPPER(), margin: 0.6 }, hi: ['rShoulder-rElbow'],
     draw(P, u, al) { const V = P.rShoulder, e = norm(flat(sub(P.rShoulder, P.lShoulder))), h = norm(flat(sub(P.rElbow, P.rShoulder)));
       glow3(P.lShoulder, P.rShoulder, SEC, 6, al * 0.9); line3(V, add(V, mul(e, 0.45)), REF, 4, 0.9 * al, [12, 10]);
       label3(add(V, mul(e, 0.45)), 'CHEST LINE', 0, -18, '#e8f1f8', al, 'center'); arc3(V, e, h, 0.3, u, MEAS, al); } },
   { id: '2.11', dur: 9, head: 'Arm height at footstrike', tech: 'Shoulder abduction',
-    why: 'Sets you up for appropriate positions at max layback.',
+    why: 'A shoulder at the correct angle is stable and stable shoulders safely produce more force.',
     items: [{ key: 'shoulder_abduction_at_footstrike', unit: '°', min: 30, max: 150, target: 90 }],
     view: { normal: armHeightNormal, joints: ARM(), margin: 0.6 }, hi: ['rShoulder-rElbow'],
     draw(P, u, al) { armHeightDraw(P, u, al); } },
@@ -4528,12 +4528,12 @@ const CHL = { n: 3, name: 'Layback and Release', at: REL, lead: 40, titleFrom: F
       let ang = Math.atan2(dot(fp, b), dot(fp, ref)); if (ang < 0) ang += Math.PI * 2;
       line3(V, add(V, mul(ref, 0.36)), REF, 4, 0.9 * al, [12, 10]); wedge3(V, ref, b, 0.25, ang * u, MEAS, al); } },
   { id: '3.3', dur: 9, at: MER, head: 'Arm height at layback', tech: 'Shoulder abduction',
-    why: '',
+    why: 'A shoulder at the correct angle is stable and stable shoulders safely produce more force.',
     items: [{ key: 'shoulder_abduction_at_mer', unit: '°', min: 30, max: 150, target: 90 }],
     view: { normal: armHeightNormal, joints: ARM(), margin: 0.6 }, hi: ['rShoulder-rElbow'],
     draw(P, u, al) { armHeightDraw(P, u, al); } },
   { id: '3.4', dur: 9, at: MER, head: 'Elbow bend at layback', tech: 'Elbow flexion',
-    why: 'A stable arm position helps protect the elbow.',
+    why: 'A stable elbow position helps reduce unnecessary stress to your Tommy John ligament (UCL).',
     items: [{ key: 'elbow_flexion_at_mer', unit: '°', min: 30, max: 150, target: 90 }],
     view: { normal: elbowNormal, joints: ARM(), margin: 0.6 }, hi: ['rShoulder-rElbow', 'rElbow-rWrist'],
     draw(P, u, al) { elbowDraw(P, u, al); } },
@@ -4543,7 +4543,7 @@ const CHL = { n: 3, name: 'Layback and Release', at: REL, lead: 40, titleFrom: F
     view: { az: 0, el: 5 },
     draw(P, u, al) { leanDraw(P, u, al, 0); } },
   { id: '3.6', dur: 9, head: 'Glove-side pull', tech: 'Trunk side tilt at release',
-    why: '',
+    why: 'A proper glove tuck will improve stability and velocity.',
     items: [{ key: 'trunk_lateral_tilt_at_release', unit: '°', plain: 'TOWARD THE GLOVE SIDE AT RELEASE' }],
     view: { az: 90, el: 5 },
     draw(P, u, al) { leanDraw(P, u, al, 1); } },
